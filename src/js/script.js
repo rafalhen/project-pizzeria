@@ -92,15 +92,15 @@
       const clickableTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
 
       /* START: add event listener to clickable trigger on event click */
-      clickableTrigger.addEventlistener('click', function(event){
+      clickableTrigger.addEventlistener('click', function(event) {
         /* prevent default action for event */
-        event.preventDefault;
+        event.preventDefault();
 
         /* find active product (product that has active class) */
-        const activeProduct = element.querySelectorAll(select.all.menuProductsActive);
+        const activeProducts = document.querySelectorAll(select.all.menuProductsActive);
 
         /* if there is active product and it's not thisProduct.element, remove class active from it */
-        for(let activeProduct of activeProducts){
+        for(let activeProduct of activeProducts) {
           if (activeProduct !== null && activeProduct !== thisProduct.element){
             activeProduct.classList.remove('active');
           }
