@@ -63,6 +63,7 @@
       thisProduct.renderInMenu();
       thisProduct.getElements();
       thisProduct.initAccordion();
+      debugger
       thisProduct.initOrderForm();
       thisProduct.processOrder();
 
@@ -162,6 +163,7 @@
       console.log('formData', formData);
 
       // set price to default price
+      console.log(thisProduct, thisProduct.data.price);
       let price = thisProduct.data.price;
 
       // for every category (param)...
@@ -189,13 +191,13 @@
               price = price - option.price;
             }
           }
-          const optionImages = thisProduct.imageWrapper.querySelector('.' + paramId + '-' + optionId);
-          for(let optionImage of optionImages) {
-            if(!optionSelected.active == true) {
-              optionImage.classList.remove(classNames.menuProduct.imageVisible);
-            }
-            else(optionSelected.active == true) {
+          const optionImage = thisProduct.imageWrapper.querySelector('.' + paramId + '-' + optionId);
+          if(optionImage) {
+            if(optionSelected) {
               optionImage.classList.add(classNames.menuProduct.imageVisible);
+            }
+            else {
+              optionImage.classList.remove(classNames.menuProduct.imageVisible);
             }
           }
         }
@@ -214,11 +216,9 @@
       console.log('thisApp.data:', thisApp.data);
 
       for(let productData in thisApp.data.products){
+        debugger
         new Product(productData, thisApp.data.products[productData]);
       }
-
-      const testProduct = new Product();
-      console.log('testProduct', testProduct);
     },
 
     initData: function(){
