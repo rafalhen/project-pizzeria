@@ -259,7 +259,7 @@
     }
 
     prepareCartProduct(){
-      const thisCart = this;
+      const thisProduct = this;
 
       const productSummary = {
         id: thisProduct.id,
@@ -279,7 +279,6 @@
       const formData = utils.serializeFormToObject(thisProduct.form);
       const params = {};
 
-
       for(let paramId in thisProduct.data.params) {
         const param = thisProduct.data.params[paramId];
 
@@ -296,7 +295,7 @@
           }
         }
       }
-    return params;
+      return params;
     }
 
   }
