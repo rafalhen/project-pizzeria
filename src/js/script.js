@@ -255,7 +255,7 @@
     addToCart(){
       const thisProduct = this;
 
-      app.cart.add(thisProduct);
+      app.cart.add(thisProduct.prepareCartProduct());
     }
 
     prepareCartProduct(){
@@ -287,7 +287,7 @@
           options: {}
         };
         for(let optionId in param.options) {
-          const option = param.option[optionId];
+          const option = param.options[optionId];
           const optionSelected = formData[paramId] && formData[paramId].includes(optionId);
 
           if(optionSelected){
