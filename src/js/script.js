@@ -481,6 +481,14 @@
       for(let prod of thisCart.products) {
         payload.products.push(prod.getData());
       }
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      };
+      fetch(url, options);
     }
   }
 
@@ -576,15 +584,8 @@
     initData: function(){
       const thisApp = this;
       const url = settings.db.url + '/' + settings.db.product;
-      const options = {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-      };
 
-      fetch(url, options)
+      fetch(url)
         .then(function(rawResponse){
           return rawResponse.json();
         })
