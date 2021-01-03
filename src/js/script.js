@@ -558,7 +558,7 @@
         priceSingle: thisCartProduct.priceSingle,
         name: thisCartProduct.name,
         params: thisCartProduct.params,
-      }
+      };
       return formProduct;
     }
 
@@ -576,8 +576,15 @@
     initData: function(){
       const thisApp = this;
       const url = settings.db.url + '/' + settings.db.product;
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      };
 
-      fetch(url)
+      fetch(url, options)
         .then(function(rawResponse){
           return rawResponse.json();
         })
