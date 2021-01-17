@@ -80,8 +80,8 @@ export const settings = {
 };
 
 export const templates = {
-  menuProduct: Handlebars.compile(document.querySelector(select.templateOf.menuProduct).innerHTML),
+/*  menuProduct: Handlebars.compile(document.querySelector(select.templateOf.menuProduct).innerHTML), */
   // CODE ADDED START
-  cartProduct: Handlebars.compile(document.querySelector(select.templateOf.cartProduct).innerHTML),
+/*  cartProduct: Handlebars.compile(document.querySelector(select.templateOf.cartProduct).innerHTML), */
   // CODE ADDED END
 };
