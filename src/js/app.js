@@ -1,62 +1,61 @@
-  import {settings, select} from './settings.js';
-  import Product from './components/Product.js';
-  import Cart from './components/Cart.js';
-  import CartProduct from './components/CartProduct.js';
-  import AmountWidget from './components/AmountWidget.js'
+import {settings, select} from './settings.js';
+import Product from './components/Product.js';
+import Cart from './components/Cart.js';
 
-  const app = {
-    initMenu: function(){
-      const thisApp = this;
 
-      for(let productData in thisApp.data.products){
-        new Product(thisApp.data.products[productData].id, thisApp.data.products[productData]);
-      }
-    },
+const app = {
+  initMenu: function(){
+    const thisApp = this;
 
-    initData: function(){
-      const thisApp = this;
-      const url = settings.db.url + '/' + settings.db.product;
+    for(let productData in thisApp.data.products){
+      new Product(thisApp.data.products[productData].id, thisApp.data.products[productData]);
+    }
+  },
 
-      fetch(url)
-        .then(function(rawResponse){
-          return rawResponse.json();
-        })
-        .then(function(parsedResponse){
-          /* console.log('parsedResponse', parsedResponse) */
+  initData: function(){
+    const thisApp = this;
+    const url = settings.db.url + '/' + settings.db.product;
 
-          /* save parsedResponse as thisApp.data.products */
-          thisApp.data.products = parsedResponse;
+    fetch(url)
+      .then(function(rawResponse){
+        return rawResponse.json();
+      })
+      .then(function(parsedResponse){
+        /* console.log('parsedResponse', parsedResponse) */
 
-          /* execute initMenu method */
-          thisApp.initMenu();
+        /* save parsedResponse as thisApp.data.products */
+        thisApp.data.products = parsedResponse;
 
-        });
+        /* execute initMenu method */
+        thisApp.initMenu();
 
-      /* console.log('thisApp.data', JSON.stringify(thisApp.data)); */
-      thisApp.data = {};
-    },
-
-    initCart: function(){
-      const thisApp = this;
-
-      const cartElem = document.querySelector(select.containerOf.cart);
-      thisApp.cart = new Cart(cartElem);
-
-      thisApp.productList = document.querySelector(select.containerOf.menu);
-
-      thisApp.productList.addEventListener('add-to-cart, function(event) {
-        app.cart.add(thisProduct.prepareCardProduct(event.detail.product);
       });
-    },
 
-    init: function(){
-      const thisApp = this;
+    /* console.log('thisApp.data', JSON.stringify(thisApp.data)); */
+    thisApp.data = {};
+  },
 
-      thisApp.initData();
-      thisApp.initCart();
-    },
-  };
+  initCart: function(){
+    const thisApp = this;
 
-  app.init();
+    const cartElem = document.querySelector(select.containerOf.cart);
+    thisApp.cart = new Cart(cartElem);
+
+    thisApp.productList = document.querySelector(select.containerOf.menu);
+
+    thisApp.productList.addEventListener('add-to-cart', function(event) {
+      app.cart.add(event.detail.product);
+    });
+  },
+
+  init: function(){
+    const thisApp = this;
+
+    thisApp.initData();
+    thisApp.initCart();
+  },
+};
+
+app.init();
 
 
