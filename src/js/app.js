@@ -30,7 +30,7 @@ const app = {
 
     /* add class "active" to matching pages, remove from non-matching */
     for(let page of thisApp.pages){
-      page.classList.toggle(classNames.pages.active, page.Id == pageId);
+      page.classList.toggle(classNames.pages.active, page.id == pageId);
     }
     /* add class "active" to matching links, remove from non-matching */
     for(let link of thisApp.navLinks){
