@@ -50,7 +50,6 @@ class Cart {
   }
 
   add(menuProduct){
-    debugger
     const thisCart = this;
     const generatedHTML = templates.cartProduct(menuProduct);
     const generatedDOM = utils.createDOMFromHTML(generatedHTML);
