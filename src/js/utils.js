@@ -1,6 +1,6 @@
 /* global Handlebars, dataSource */
 
-export const utils = {};
+export const utils = {}; // eslint-disable-line no-unused-vars
 
 utils.createDOMFromHTML = function(htmlString) {
   let div = document.createElement('div');
@@ -29,7 +29,7 @@ utils.serializeFormToObject = function(form){
         } else if ((field.type != 'checkbox' && field.type != 'radio') || field.checked) {
           utils.createPropIfUndefined(output, field.name);
           output[field.name].push(field.value);
-        }
+        } else if(!output[field.name]) output[field.name] = [];
       }
     }
   }
@@ -50,7 +50,6 @@ utils.convertDataSourceToDbJson = function(){
 
   console.log(JSON.stringify({product: productJson, order: []}, null, '  '));
 };
-
 utils.numberToHour = function(number){
   return (Math.floor(number) % 24) + ':' + (number % 1 * 60 + '').padStart(2, '0');
 };
@@ -70,7 +69,6 @@ utils.addDays = function(dateStr, days){
   dateObj.setDate(dateObj.getDate() + days);
   return dateObj;
 };
-
 Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
   return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
 });
