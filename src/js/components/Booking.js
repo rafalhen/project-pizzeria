@@ -9,6 +9,7 @@ class Booking{
   constructor(element){
     const thisBooking = this;
 
+    thisBooking.selectedTable = null;
     thisBooking.render(element);
     thisBooking.initWidgets();
     thisBooking.getData();
@@ -166,6 +167,7 @@ class Booking{
     thisBooking.dom.hourPicker = thisBooking.dom.wrapper.querySelector(select.widgets.hourPicker.wrapper);
 
     thisBooking.dom.tables = thisBooking.dom.wrapper.querySelectorAll(select.booking.tables);
+    thisBooking.dom.eachTables = thisBooking.dom.wrapper.querySelector(select.booking.eachTables);
   }
 
   initWidgets(){
@@ -194,6 +196,50 @@ class Booking{
     thisBooking.dom.wrapper.addEventListener('updated', function(){
       thisBooking.updateDOM;
     });
+
+    thisBooking.dom.eachTables.addEventListener('click', function(event){
+      event.preventDefault();
+      thisBooking.changeEvent = event;
+      thisBooking.bookTable(event);
+    });
+
+    thisBooking.dom.wrapper.addEventListener('updated', function(){
+      thisBooking.updateDOM();
+      thisBooking.initTables();
+    });
+  }
+
+  initTables(){
+    const thisBooking = this;
+
+    for(let table of thisBooking.dom.tables){
+      if(table.classList.contains(classNames.booking.tableSelected)){
+        table.classList.remove(classNames.booking.tableSelected);
+      }
+    }
+    thisBooking.selectedTable = null;
+  }
+
+  bookTable(event){
+    const thisBooking = this;
+
+    const clickedElement = event.target;
+    if(clickedElement.classList.contains(classNames.booking.table)){
+      const tableNumber = clickedElement.getAttribute('data-table');
+
+      if(!clickedElement.classList.contains(classNames.booking.tableBooked)
+      && !clickedElement.classList.contains(classNames.booking.tableSelected))
+      { thisBooking.initTables();
+        clickedElement.classList.add(classNames.booking.tableSelected);
+        thisBooking.selectedTable = tableNumber;
+      } else if(!clickedElement.classList.contains(classNames.booking.tableBooked)
+      && clickedElement.classList.contains(classNames.booking.tableSelected))
+      { clickedElement.classList.remove(classNames.booking.tableSelected);
+        thisBooking.selectedTable = 0;
+      } else if(clickedElement.classList.contains(classNames.booking.tableBooked))
+      { alert('This table is not available at the moment. Please select another one');
+      }
+    }
   }
 
 }
