@@ -5,12 +5,14 @@ export const select = {
     menuProduct: '#template-menu-product',
     cartProduct: '#template-cart-product',
     bookingWidget: '#template-booking-widget',
+    homeWidget: '#template-home-site',
   },
   containerOf: {
     menu: '#product-list',
     cart: '#cart',
     pages: '#pages',
     booking: '.booking-wrapper',
+    home: '.home.container',
   },
   all: {
     menuProducts: '#product-list > .product',
@@ -24,6 +26,10 @@ export const select = {
     imageWrapper: '.product__images',
     amountWidget: '.widget-amount',
     cartButton: '[href="#add-to-cart"]',
+  },
+  home: {
+    orderButton: '.order-online',
+    bookButton: '.book-a-table',
   },
   widgets: {
     amount: {
@@ -40,6 +46,9 @@ export const select = {
       input: 'input[type="range"]',
       output: '.output',
     },
+    carousel: {
+      wrapper: '.carousel-main',
+    }
   },
   cart: {
     productList: '.cart__order-summary',
@@ -65,6 +74,8 @@ export const select = {
     tables: '.floor-plan .table',
     eachTables: '.floor-plan',
     tableSelected: '.table.selected',
+    orderButton: '.btn-secondary',
+    starters: '.starters',
   },
   nav: {
     links: '.main-nav a',
